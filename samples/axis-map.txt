@@ -1,0 +1,12 @@
+﻿GUIDED AXIS MAP - T.Flight Hotas One
+====================================
+
+baseline: X=32767  Y=32767  Z=32767  R=32767  U=32767  V=32767
+
+THROTTLE fwd   -> axis V  (js1_slider2 ) delta 32768   raw 65535
+THROTTLE back  -> axis Z  (js1_z       ) delta 32768   raw 65535
+RUDDER right   -> axis Z  (js1_z       ) delta 32768   raw 65535
+STICK right    -> axis X  (js1_x       ) delta 32768   raw 65535
+STICK forward  -> axis Z  (js1_z       ) delta 32768   raw 65535
+
+THROTTLE POLARITY: inconclusive - forward and back picked different axes

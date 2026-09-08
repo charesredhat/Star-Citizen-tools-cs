@@ -1,0 +1,6 @@
+# capture output from local runs
+samples/*.local.txt
+
+# editor noise
+Thumbs.db
+desktop.ini

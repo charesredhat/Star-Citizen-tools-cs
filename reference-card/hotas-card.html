@@ -1,0 +1,441 @@
+<title>Hotas One Kneeboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+  :root {
+    --paper:      #F4F6F7;
+    --surface:    #FFFFFF;
+    --ink:        #12191D;
+    --muted:      #5A686F;
+    --faint:      #8A979D;
+    --rule:       #C9D2D6;
+    --rule-soft:  #E1E7EA;
+    --stick:      #B4611A;
+    --stick-wash: #F7EDE3;
+    --throttle:   #1F6B7D;
+    --throt-wash: #E6F0F2;
+
+    --f-label: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --f-body:  "Barlow", "Helvetica Neue", Arial, sans-serif;
+    --f-mono:  "JetBrains Mono", "Consolas", "Courier New", monospace;
+  }
+
+  :root:not([data-theme="light"]) { }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0D1317;
+      --surface:    #141C21;
+      --ink:        #E4EBEE;
+      --muted:      #94A2AA;
+      --faint:      #6C7C85;
+      --rule:       #26333A;
+      --rule-soft:  #1C262C;
+      --stick:      #E39A4A;
+      --stick-wash: #241A11;
+      --throttle:   #4FB0C6;
+      --throt-wash: #102228;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #0D1317;
+    --surface:    #141C21;
+    --ink:        #E4EBEE;
+    --muted:      #94A2AA;
+    --faint:      #6C7C85;
+    --rule:       #26333A;
+    --rule-soft:  #1C262C;
+    --stick:      #E39A4A;
+    --stick-wash: #241A11;
+    --throttle:   #4FB0C6;
+    --throt-wash: #102228;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 14px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .card {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 28px 30px 24px;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ---------- header ---------- */
+  .head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px 24px;
+    align-items: end;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 12px;
+  }
+  .head h1 {
+    font-family: var(--f-label);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 0.95;
+    letter-spacing: 0.005em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .head .sub {
+    font-family: var(--f-label);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+  .guid {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--faint);
+    margin-top: 6px;
+    word-break: break-all;
+  }
+  .load {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-end;
+  }
+  .load .cap {
+    font-family: var(--f-label);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .load code {
+    font-family: var(--f-mono);
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  /* ---------- section heads ---------- */
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 9px;
+  }
+  .sec-head h2 {
+    font-family: var(--f-label);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .sec-head .note {
+    font-family: var(--f-label);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--faint);
+    text-transform: uppercase;
+  }
+
+  /* ---------- axes ---------- */
+  .axes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
+  .axis { background: var(--surface); padding: 10px 12px 11px; display: flex; flex-direction: column; gap: 3px; }
+  .axis .phys { font-family: var(--f-label); font-size: 15px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .axis .tok  { font-family: var(--f-mono); font-size: 12.5px; font-weight: 500; }
+  .axis .act  { font-size: 13px; color: var(--muted); }
+  .axis .dz   { font-family: var(--f-mono); font-size: 11px; color: var(--faint); margin-top: 1px; }
+  .axis .dz.throw { color: var(--throttle); font-weight: 500; }
+  .axis.s .tok { color: var(--stick); }
+  .axis.t .tok { color: var(--throttle); }
+  .flag { font-family: var(--f-label); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stick); border: 1px solid currentColor; padding: 0 4px; margin-left: 6px; white-space: nowrap; }
+
+  /* ---------- two halves ---------- */
+  .halves { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .half { display: flex; flex-direction: column; gap: 9px; }
+  .half.stick .sec-head h2 { color: var(--stick); }
+  .half.throt .sec-head h2 { color: var(--throttle); }
+
+  .rows { display: flex; flex-direction: column; }
+  .row {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 10px;
+    align-items: baseline;
+    padding: 6px 0 6px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .row:first-child { border-top: 1px solid var(--rule-soft); }
+  .num {
+    font-family: var(--f-mono);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .stick .num { color: var(--stick); }
+  .throt .num { color: var(--throttle); }
+  .what { font-family: var(--f-label); font-size: 16px; font-weight: 600; letter-spacing: 0.02em; line-height: 1.2; }
+  .tok  { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); word-break: break-all; }
+
+  /* ---------- hat ---------- */
+  .hat { margin-top: 4px; background: var(--stick-wash); border: 1px solid var(--rule-soft); padding: 12px 12px 13px; }
+  .hat .cap { font-family: var(--f-label); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stick); margin-bottom: 9px; }
+  .cross { display: grid; grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto auto; gap: 5px 9px; align-items: center; }
+  .cross .c { grid-column: 2; grid-row: 2; width: 20px; height: 20px; border: 1.5px solid var(--stick); border-radius: 50%; justify-self: center; }
+  .dir { display: flex; flex-direction: column; gap: 1px; }
+  .dir .d { font-family: var(--f-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--stick); }
+  .dir .n { font-family: var(--f-label); font-size: 14px; font-weight: 600; line-height: 1.15; }
+  .dir .t { font-family: var(--f-mono); font-size: 10px; color: var(--muted); word-break: break-all; }
+  .d-up   { grid-column: 2; grid-row: 1; text-align: center; align-items: center; }
+  .d-down { grid-column: 2; grid-row: 3; text-align: center; align-items: center; }
+  .d-left { grid-column: 1; grid-row: 2; text-align: right; align-items: flex-end; }
+  .d-right{ grid-column: 3; grid-row: 2; }
+  .hat-note { margin: 10px 0 0; font-size: 11.5px; line-height: 1.4; color: var(--muted); border-top: 1px solid var(--rule-soft); padding-top: 7px; }
+  .hat-note code { font-family: var(--f-mono); font-size: 10.5px; color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  .foot {
+    border-top: 2px solid var(--ink);
+    padding-top: 11px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .foot h3 { font-family: var(--f-label); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 4px; }
+  .foot p { margin: 0; font-size: 12.5px; color: var(--muted); max-width: 62ch; }
+  .foot code { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink); word-break: break-word; }
+  .foot em { font-style: normal; font-weight: 600; color: var(--ink); }
+  .swap { color: var(--stick); font-weight: 600; }
+
+  /* ---------- print ---------- */
+  @page { size: letter portrait; margin: 11mm; }
+  @media print {
+    :root {
+      --paper: #FFFFFF; --surface: #FFFFFF; --ink: #000000;
+      --muted: #444C50; --faint: #6B7579;
+      --rule: #9AA6AB; --rule-soft: #C8D0D4;
+      --stick: #8F4A10; --stick-wash: #FFFFFF;
+      --throttle: #14545F; --throt-wash: #FFFFFF;
+    }
+    body { background: #FFFFFF; font-size: 11.5px; }
+    .card { max-width: none; border: none; padding: 0; gap: 13px; }
+    .head h1 { font-size: 31px; }
+    .axes, .halves, .hat, .row, .foot { break-inside: avoid; }
+    .load code { background: #FFFFFF; }
+  }
+
+  @media (max-width: 720px) {
+    .axes { grid-template-columns: 1fr 1fr; }
+    .halves { grid-template-columns: 1fr; }
+    .head { grid-template-columns: 1fr; align-items: start; }
+    .load { text-align: left; align-items: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="card">
+
+  <header class="head">
+    <div>
+      <h1>CS T Flight Hotas One</h1>
+      <div class="sub">Star Citizen 4.10 &middot; Build 1.0.191.51145 &middot; Device js1</div>
+      <div class="guid">{B68D044F-0000-0000-0000-504944564944}</div>
+    </div>
+    <div class="load">
+      <span class="cap">Load from console (~)</span>
+      <code>pp_rebindkeys layout_CS-T-Flight-Hotas-One_exported</code>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <h2>Axes</h2>
+      <span class="note">Measured from the device</span>
+    </div>
+    <div class="axes">
+      <div class="axis s">
+        <span class="phys">Stick left / right</span>
+        <span class="tok">js1_x</span>
+        <span class="act">Roll &mdash; v_roll</span>
+        <span class="dz">deadzone 0.05</span>
+      </div>
+      <div class="axis s">
+        <span class="phys">Stick fwd / back</span>
+        <span class="tok">js1_y</span>
+        <span class="act">Pitch &mdash; v_pitch</span>
+        <span class="dz">deadzone 0.05</span>
+      </div>
+      <div class="axis t">
+        <span class="phys">Rudder rocker</span>
+        <span class="tok">js1_rotz</span>
+        <span class="act">Yaw &mdash; v_yaw</span>
+        <span class="dz">deadzone 0.08</span>
+      </div>
+      <div class="axis t">
+        <span class="phys">Throttle lever</span>
+        <span class="tok">js1_z</span>
+        <span class="act">Throttle &mdash; v_strafe_longitudinal</span>
+        <span class="dz throw">btn 15 flips direction</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="halves">
+
+    <section class="half stick">
+      <div class="sec-head">
+        <h2>Stick</h2>
+        <span class="note">Buttons 1&ndash;4 &middot; hat</span>
+      </div>
+      <div class="rows">
+        <div class="row">
+          <span class="num">1</span>
+          <span><span class="what">Fire selected weapon group</span><br><span class="tok">v_attack1</span></span>
+        </div>
+        <div class="row">
+          <span class="num">2</span>
+          <span><span class="what">Launch missile</span><br><span class="tok">v_weapon_launch_missile &middot; spaceship_missiles</span></span>
+        </div>
+        <div class="row">
+          <span class="num">3</span>
+          <span><span class="what">Cycle hostile target</span><br><span class="tok">v_target_cycle_hostile_fwd</span></span>
+        </div>
+        <div class="row">
+          <span class="num">4</span>
+          <span><span class="what">Pin target 1</span><br><span class="tok">v_target_toggle_pin_index_1</span></span>
+        </div>
+      </div>
+
+      <div class="hat">
+        <div class="cap">Hat switch &mdash; strafe &mdash; js1_hat1</div>
+        <div class="cross">
+          <div class="dir d-up">
+            <span class="d">UP</span>
+            <span class="n">Strafe up</span>
+            <span class="t">v_strafe_up</span>
+          </div>
+          <div class="dir d-left">
+            <span class="d">LEFT</span>
+            <span class="n">Strafe left</span>
+            <span class="t">v_strafe_left</span>
+          </div>
+          <div class="c"></div>
+          <div class="dir d-right">
+            <span class="d">RIGHT</span>
+            <span class="n">Strafe right</span>
+            <span class="t">v_strafe_right</span>
+          </div>
+          <div class="dir d-down">
+            <span class="d">DOWN</span>
+            <span class="n">Strafe down</span>
+            <span class="t">v_strafe_down</span>
+          </div>
+        </div>
+        <p class="hat-note">Digital strafe &mdash; full deflection while held. Lives in
+        <code>spaceship_movement</code>, not targeting.</p>
+      </div>
+    </section>
+
+    <section class="half throt">
+      <div class="sec-head">
+        <h2>Throttle</h2>
+        <span class="note">Buttons 5&ndash;15</span>
+      </div>
+      <div class="rows">
+        <div class="row">
+          <span class="num">5</span>
+          <span><span class="what">Launch countermeasures</span><br><span class="tok">v_weapon_countermeasure_decoy_launch</span></span>
+        </div>
+        <div class="row">
+          <span class="num">6</span>
+          <span><span class="what">Afterburner / boost</span><br><span class="tok">v_afterburner</span></span>
+        </div>
+        <div class="row">
+          <span class="num">7</span>
+          <span><span class="what">Space brake</span><br><span class="tok">v_brake</span></span>
+        </div>
+        <div class="row">
+          <span class="num">8</span>
+          <span><span class="what">Change camera view</span><br><span class="tok">v_view_cycle_fwd &middot; spaceship_view</span></span>
+        </div>
+        <div class="row">
+          <span class="num">9</span>
+          <span><span class="what">Radar ping</span><br><span class="tok">v_invoke_ping &middot; spaceship_radar</span></span>
+        </div>
+        <div class="row">
+          <span class="num">10</span>
+          <span><span class="what">Scan mode</span><br><span class="tok">v_toggle_scan_mode</span></span>
+        </div>
+        <div class="row">
+          <span class="num">11</span>
+          <span><span class="what">Quantum mode</span><br><span class="tok">v_toggle_quantum_mode</span></span>
+        </div>
+        <div class="row">
+          <span class="num">12</span>
+          <span><span class="what">Engage quantum drive</span><br><span class="tok">v_toggle_qdrive_engagement</span></span>
+        </div>
+        <div class="row">
+          <span class="num">13</span>
+          <span><span class="what">Landing gear</span><br><span class="tok">v_toggle_landing_system</span></span>
+        </div>
+        <div class="row">
+          <span class="num">14</span>
+          <span><span class="what">Launch noise</span><br><span class="tok">v_weapon_countermeasure_noise_launch</span></span>
+        </div>
+        <div class="row">
+          <span class="num">15</span>
+          <span><span class="what">Flip throttle direction</span><br><span class="tok">v_strafe_longitudinal_invert</span></span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="foot">
+    <div>
+      <h3>One action, one button</h3>
+      <p>Two different actions on one input makes SC drop <em>both</em> &mdash;
+      <code>v_attack1</code> + <code>v_attack2</code> on button 1 proved it, and it's why
+      flight ready had to vacate 8 rather than share it. The rule is per <em>device</em>
+      though, so camera view holds <code>kb1_f4</code> and <code>js1_button8</code> at
+      once quite happily.</p>
+    </div>
+    <div>
+      <h3>Dead axes &mdash; never bind these</h3>
+      <p><span class="swap">js1_slider1</span> never moves at all, and
+      <span class="swap">js1_slider2</span> latches to maximum and stays there. The
+      stick advertises six axes; only four are real. A binding on either of these
+      is silently inert.</p>
+    </div>
+    <div>
+      <h3>The throttle isn't called "throttle"</h3>
+      <p>In 4.10's Master Modes the throttle rows are the <em>longitudinal strafe</em>
+      family. <code>v_throttle_abs</code> does not exist and is discarded in silence.
+      Increase is <code>v_strafe_forward</code>, decrease is <code>v_strafe_back</code>,
+      and the lever axis is <code>v_strafe_longitudinal</code>.</p>
+    </div>
+    <div>
+      <h3>Reading actionmaps.xml</h3>
+      <p>It records only what <em>differs</em> from SC defaults. After loading, entries
+      like <code>v_pitch</code> and <code>v_attack1</code> will be missing &mdash; that
+      means they match the default and are live, not that they failed.</p>
+    </div>
+  </footer>
+
+</div>
