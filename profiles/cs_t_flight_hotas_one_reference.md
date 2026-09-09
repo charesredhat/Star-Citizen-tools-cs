@@ -8,15 +8,19 @@ Console load:  `pp_rebindkeys layout_CS-T-Flight-Hotas-One_exported`
 
 | Physical control        | winmm | SC input      | Action                  |
 |-------------------------|-------|---------------|-------------------------|
-| Stick left / right      | X     | `js1_x`       | `v_roll`                |
+| Stick left / right      | X     | `js1_x`       | `v_yaw`                 |
 | Stick forward / back    | Y     | `js1_y`       | `v_pitch`               |
 | Throttle lever          | Z     | `js1_z`       | `v_strafe_longitudinal` |
-| Rudder rocker           | R     | `js1_rotz`    | `v_yaw`                 |
+| Rudder rocker           | R     | `js1_rotz`    | `v_roll`                |
 
 Dead axes on this device — do not bind anything to these:
 `js1_slider1` (never moves) and `js1_slider2` (latches to max and stays).
 
-Deadzones: 0.05 on x/y, 0.08 on the rudder rocker.
+Deadzones: 0.05 on x/y, 0.08 on the rudder rocker. Deadzones follow the *axis*,
+not the action, so swapping yaw and roll does not move them.
+
+Note the pairing: the stick's sideways travel yaws, the rocker rolls. That is the
+reverse of the usual flight-sim convention and is deliberate.
 
 ## The throttle is not called "throttle"
 

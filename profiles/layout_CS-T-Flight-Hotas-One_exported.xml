@@ -21,17 +21,16 @@
   <option input="x" deadzone="0.05"/>
   <option input="y" deadzone="0.05"/>
   <option input="rotz" deadzone="0.08"/>
-  <option input="z" invert="1"/>
  </deviceoptions>
  <modifiers />
  <actionmap name="spaceship_movement">
-  <action name="v_roll">
+  <action name="v_yaw">
    <rebind input="js1_x"/>
   </action>
   <action name="v_pitch">
    <rebind input="js1_y"/>
   </action>
-  <action name="v_yaw">
+  <action name="v_roll">
    <rebind input="js1_rotz"/>
   </action>
   <action name="v_strafe_longitudinal">
