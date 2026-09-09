@@ -59,6 +59,12 @@ Two names found this way, neither guessable:
 |---|---|---|
 | Throttle - Increase | `v_strafe_forward` | `spaceship_movement` |
 | Change Vehicle Camera View | `v_view_cycle_fwd` | `spaceship_view` |
+| Boost | `v_afterburner` | `spaceship_movement` |
+
+The Boost row is worth noting for a different reason: the UI label changed with
+Master Modes but the internal name did not. A label can be renamed out from
+under you while the action name stays put, so the label is never evidence of
+what the action is called.
 
 ## Findings worth keeping
 

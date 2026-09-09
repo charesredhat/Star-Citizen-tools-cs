@@ -68,7 +68,7 @@ Target cycling now lives only on button 3 (`v_target_cycle_hostile_fwd`).
 | 3 | Cycle hostile target            | `v_target_cycle_hostile_fwd`           |
 | 4 | Pin target 1                    | `v_target_toggle_pin_index_1`          |
 | 5 | Launch countermeasures (decoy)  | `v_weapon_countermeasure_decoy_launch` |
-| 6 | Afterburner / boost             | `v_afterburner`                        |
+| 6 | Boost                           | `v_afterburner`                        |
 | 7 | Space brake                     | `v_brake`                              |
 | 8 | Change vehicle camera view      | `v_view_cycle_fwd` (`spaceship_view`)  |
 | 9 | Radar ping                      | `v_invoke_ping`                        |
@@ -82,8 +82,12 @@ Target cycling now lives only on button 3 (`v_target_cycle_hostile_fwd`).
 Flight ready is no longer on the stick — button 8 was reassigned to the camera
 view and SC drops *both* actions if two share an input.
 
-Camera view is bound twice on purpose: `kb1_f4` and `js1_button8`. That is
-allowed because they are different *devices* — the one-input rule is per device.
+Camera view is bound twice on purpose: `kb1_f4` and `js1_button8`; boost the
+same way with `kb1_lshift` and `js1_button6`. That is allowed because they are
+different *devices* — the one-input rule is per device.
+
+The UI row labelled **Boost** is `v_afterburner` internally. The label changed
+in Master Modes; the action name did not.
 
 SC allows only one input per action per device, so an action lives on exactly
 one button — moving decoy launch onto 5 is why gear moved to 13. It also refuses

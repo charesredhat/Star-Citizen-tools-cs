@@ -50,6 +50,7 @@
    <rebind input="js1_button13"/>
   </action>
   <action name="v_afterburner">
+   <rebind input="kb1_lshift"/>
    <rebind input="js1_button6"/>
   </action>
   <action name="v_brake">
