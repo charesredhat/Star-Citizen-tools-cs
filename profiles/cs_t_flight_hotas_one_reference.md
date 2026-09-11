@@ -111,6 +111,7 @@ none of it is assumed any more.
 | `v_strafe_longitudinal` = throttle| flown in game                           |
 | Throttle polarity + button 15     | flip tested in game, works              |
 | Buttons and hat                   | flown in game                           |
+| Stick = yaw, rocker = roll        | flown in game after the swap            |
 
 If you ever need an action's real internal name, use the trick that solved the
 throttle: bind that row in the keybindings UI to an unused key, exit the game
