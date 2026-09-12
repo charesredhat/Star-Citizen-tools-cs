@@ -72,6 +72,9 @@
   <action name="v_attack1">
    <rebind input="js1_button1"/>
   </action>
+  <action name="v_weapon_cycle_operator_mode">
+   <rebind input="js1_button4"/>
+  </action>
  </actionmap>
  <actionmap name="spaceship_missiles">
   <action name="v_weapon_launch_missile">
@@ -81,11 +84,6 @@
  <actionmap name="spaceship_targeting_advanced">
   <action name="v_target_cycle_hostile_fwd">
    <rebind input="js1_button3"/>
-  </action>
- </actionmap>
- <actionmap name="spaceship_targeting">
-  <action name="v_target_toggle_pin_index_1">
-   <rebind input="js1_button4"/>
   </action>
  </actionmap>
  <actionmap name="seat_general">

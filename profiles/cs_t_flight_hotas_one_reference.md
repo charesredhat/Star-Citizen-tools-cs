@@ -70,7 +70,7 @@ Target cycling now lives only on button 3 (`v_target_cycle_hostile_fwd`).
 | 1 | Fire selected weapon group      | `v_attack1`                            |
 | 2 | Launch missile                  | `v_weapon_launch_missile`              |
 | 3 | Cycle hostile target            | `v_target_cycle_hostile_fwd`           |
-| 4 | Pin target 1                    | `v_target_toggle_pin_index_1`          |
+| 4 | Cycle operator mode             | `v_weapon_cycle_operator_mode`         |
 | 5 | Launch countermeasures (decoy)  | `v_weapon_countermeasure_decoy_launch` |
 | 6 | Boost                           | `v_afterburner`                        |
 | 7 | Space brake                     | `v_brake`                              |
@@ -83,7 +83,8 @@ Target cycling now lives only on button 3 (`v_target_cycle_hostile_fwd`).
 |14 | Launch noise                    | `v_weapon_countermeasure_noise_launch` |
 |15 | Flip throttle direction         | `v_strafe_longitudinal_invert`         |
 
-Flight ready is no longer on the stick — button 8 was reassigned to the camera
+Pin target 1 is no longer on the stick — button 4 became the operator-mode
+cycle. Flight ready is no longer on the stick — button 8 was reassigned to the camera
 view and SC drops *both* actions if two share an input.
 
 Camera view is bound twice on purpose: `kb1_f4` and `js1_button8`; boost the
